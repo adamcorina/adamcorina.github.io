@@ -4,6 +4,7 @@ import { pct } from "../lib/utils";
 import ProgressBar from "../components/ProgressBar";
 import QuestionCard from "../components/QuestionCard";
 import ResultCard from "../components/ResultCard";
+import QuizHeader from "../components/QuizHeader";
 
 export default function GenericQuiz<Options extends readonly string[]>({
   quiz,
@@ -45,15 +46,11 @@ export default function GenericQuiz<Options extends readonly string[]>({
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
-      <header className="mb-6">
-        <h1 className="text-3xl font-semibold tracking-tight">{header.title}</h1>
-        <p className="mt-2 text-slate-600">{header.intro}</p>
-        <ul className="mt-3 grid gap-2 text-slate-700 sm:grid-cols-2">
-          {options.map((o) => (
-            <li key={o.key}><span className="font-medium">{o.short}</span> — {o.long}</li>
-          ))}
-        </ul>
-      </header>
+    <QuizHeader
+        title={header.title}
+        intro={header.intro}
+        options={options.map((o) => ({ short: o.short, long: o.long }))}
+    />
 
       <div className="mb-6"><ProgressBar percent={pct(completeness)} /></div>
 
