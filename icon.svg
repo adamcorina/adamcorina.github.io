@@ -1,0 +1,25 @@
+<!-- icon-hex-q-centered.svg -->
+<svg viewBox="0 0 256 256" width="256" height="256" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="hexTitle hexDesc">
+  <title id="hexTitle">Tech Quizzes — Hexagon Q (centered)</title>
+  <desc id="hexDesc">Rounded square with a centered hexagon and stylized Q</desc>
+  <style>
+    :root { --icon-bg:#0f172a; --icon-fg:#ffffff; --icon-accent:#22c55e; }
+  </style>
+
+  <!-- Background -->
+  <rect x="16" y="16" width="224" height="224" rx="48" fill="var(--icon-bg)"/>
+
+  <!-- Centered hexagon (pointy-top), R≈74 around (128,128) -->
+  <!-- Points: (128,54) (192,91) (192,165) (128,202) (64,165) (64,91) -->
+  <polygon
+    points="128,54 192,91 192,165 128,202 64,165 64,91"
+    fill="none"
+    stroke="var(--icon-accent)"
+    stroke-width="14"
+    stroke-linejoin="round"
+  />
+
+  <!-- Stylized Q (centered at 128,128) -->
+  <circle cx="128" cy="128" r="44" fill="none" stroke="var(--icon-fg)" stroke-width="16"/>
+  <line x1="154" y1="154" x2="176" y2="176" stroke="var(--icon-fg)" stroke-width="16" stroke-linecap="round"/>
+</svg>
