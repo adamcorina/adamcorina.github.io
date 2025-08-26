@@ -65,7 +65,7 @@ export default function Quiz() {
         </h1>
 
         <p className="mt-2 text-slate-600">
-          Answer 14 quick yes/no questions to pinpoint the frontend rendering approach that fits your needs.
+          Answer {QUESTIONS.length} quick yes/no questions to pinpoint the frontend rendering approach that fits your needs.
         </p>
 
         <ul className="mt-3 grid gap-2 text-slate-700 sm:grid-cols-2">
@@ -156,7 +156,7 @@ export default function Quiz() {
       )}
 
       <footer className="mt-10 text-center text-xs text-slate-500">
-        <p>Built with React + Tailwind. 14 questions · Yes/No. No data leaves your browser.</p>
+        <p>Built with React + Tailwind. {QUESTIONS.length} questions · Yes/No. No data leaves your browser.</p>
       </footer>
     </div>
   );

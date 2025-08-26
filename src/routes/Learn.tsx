@@ -6,7 +6,7 @@ type Props = { option: Option };
 
 export default function Learn({ option }: Props) {
   const info = APPROACH_INFO[option];
-  const trueTech = QUESTIONS.filter((q) => q.answers[option]).map((q) => q.tech);
+  const trueTech = QUESTIONS.filter((q) => q.answers[option]).map((q) => q.techText);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
