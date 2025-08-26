@@ -5,3 +5,6 @@ export function pct(n: number) {
 export function classNames(...xs: Array<string | false | null | undefined>) {
   return xs.filter(Boolean).join(" ");
 }
+
+export const cx = (...xs: Array<string | false | null | undefined>) =>
+  xs.filter(Boolean).join(" ");

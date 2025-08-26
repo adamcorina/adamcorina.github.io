@@ -1,162 +1,128 @@
 import { useMemo, useState } from "react";
-import { OPTIONS, QUESTIONS, type Option } from "../data/questions";
+import type { QuizModule } from "../types/Question";
+import { pct } from "../lib/utils";
 import ProgressBar from "../components/ProgressBar";
 import QuestionCard from "../components/QuestionCard";
 import ResultCard from "../components/ResultCard";
-import { pct } from "../lib/utils";
-import { navigate } from "../lib/router";
 
-export default function Quiz() {
-  const [answers, setAnswers] = useState<(boolean | null)[]>(
-    Array(QUESTIONS.length).fill(null)
-  );
+export default function GenericQuiz<Options extends readonly string[]>({
+  quiz,
+}: { quiz: QuizModule<Options> }) {
+  type OptionKey = Options[number];
+
+  const { questions, options, header, slug } = quiz;
+  const [answers, setAnswers] = useState<(boolean | null)[]>(Array(questions.length).fill(null));
   const [submitted, setSubmitted] = useState(false);
-  const [expanded, setExpanded] = useState<Option | null>(null);
+  const [expanded, setExpanded] = useState<OptionKey | null>(null);
 
-  const completeness = useMemo(() => {
-    const answered = answers.filter((a) => a !== null).length;
-    return answered / QUESTIONS.length;
-  }, [answers]);
+  const completeness = useMemo(
+    () => answers.filter((a) => a !== null).length / questions.length,
+    [answers, questions.length]
+  );
 
   const results = useMemo(() => {
-    const answeredIdx = answers.map((a, i) => (a === null ? -1 : i)).filter((i) => i >= 0);
-    const total = answeredIdx.length || QUESTIONS.length;
+    type Stat = { matches: number; percent: number; mismatches: number[] };
+    const init = Object.fromEntries(options.map(o => [o.key, { matches: 0, percent: 0, mismatches: [] as number[] }])) as Record<OptionKey, Stat>;
 
-    const stats: Record<Option, { matches: number; percent: number; mismatches: number[] }> = {
-      SSG: { matches: 0, percent: 0, mismatches: [] },
-      ISR: { matches: 0, percent: 0, mismatches: [] },
-      SSR: { matches: 0, percent: 0, mismatches: [] },
-      ESR: { matches: 0, percent: 0, mismatches: [] },
-      CSR: { matches: 0, percent: 0, mismatches: [] },
-    };
+    const idxs = answers.map((a, i) => (a === null ? -1 : i)).filter(i => i >= 0);
+    const total = idxs.length || questions.length;
+    if (idxs.length === 0) return init;
 
-    if (answeredIdx.length === 0) return stats;
-
-    for (const s of OPTIONS) {
-      let m = 0;
-      const mismatches: number[] = [];
-      for (const i of answeredIdx) {
-        const ok = answers[i] === QUESTIONS[i].answers[s];
-        if (ok) m += 1;
-        else mismatches.push(QUESTIONS[i].id);
+    const stats = { ...init };
+    for (const opt of options) {
+      let m = 0; const mm: number[] = [];
+      for (const i of idxs) {
+        const ok = answers[i] === !!questions[i].answers[opt.key];
+        if (ok) m += 1; else mm.push(questions[i].id);
       }
-      stats[s].matches = m;
-      stats[s].percent = m / total;
-      stats[s].mismatches = mismatches;
+      stats[opt.key] = { matches: m, percent: m / total, mismatches: mm };
     }
     return stats;
-  }, [answers]);
+  }, [answers, options, questions]);
 
-  const allAnswered = completeness === 1;
-
-  const reset = () => {
-    setAnswers(Array(QUESTIONS.length).fill(null));
-    setSubmitted(false);
-    setExpanded(null);
-  };
-
-  const best = Math.max(...OPTIONS.map((x) => pct(results[x].percent)));
+  const best = Math.max(...options.map((o) => pct(results[o.key]?.percent || 0)));
+  const reset = () => { setAnswers(Array(questions.length).fill(null)); setSubmitted(false); setExpanded(null); };
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
       <header className="mb-6">
-        <h1 className="text-3xl font-semibold tracking-tight">
-          Right Tool Selector: Frontend Apps
-        </h1>
-
-        <p className="mt-2 text-slate-600">
-          Answer {QUESTIONS.length} quick yes/no questions to pinpoint the frontend rendering approach that fits your needs.
-        </p>
-
+        <h1 className="text-3xl font-semibold tracking-tight">{header.title}</h1>
+        <p className="mt-2 text-slate-600">{header.intro}</p>
         <ul className="mt-3 grid gap-2 text-slate-700 sm:grid-cols-2">
-          <li><span className="font-medium">SSG</span> — Static Site Generation</li>
-          <li><span className="font-medium">ISR</span> — Incremental Static Regeneration</li>
-          <li><span className="font-medium">SSR</span> — Server-Side Rendering</li>
-          <li><span className="font-medium">ESR</span> — Edge-Side Rendering</li>
-          <li><span className="font-medium">CSR</span> — Client-Side Rendering</li>
+          {options.map((o) => (
+            <li key={o.key}><span className="font-medium">{o.short}</span> — {o.long}</li>
+          ))}
         </ul>
       </header>
 
-      {/* Progress */}
-      <div className="mb-6">
-        <ProgressBar percent={pct(completeness)} />
-      </div>
+      <div className="mb-6"><ProgressBar percent={pct(completeness)} /></div>
 
-      {/* Questions */}
       <div className="space-y-4">
-        {QUESTIONS.map((q, idx) => (
+        {questions.map((q, idx) => (
           <QuestionCard
             key={q.id}
             id={q.id}
             text={q.text}
             value={answers[idx]}
             onAnswer={(val) => {
-              const next = [...answers];
-              next[idx] = val;
-              setAnswers(next);
+              const next = [...answers]; next[idx] = val; setAnswers(next);
             }}
           />
         ))}
       </div>
 
-      {/* Actions */}
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <button
           type="button"
           onClick={() => setSubmitted(true)}
-          className="rounded-2xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
+          className="rounded-2xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
         >
           See results
         </button>
         <button
           type="button"
           onClick={reset}
-          className="rounded-2xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50"
+          className="rounded-2xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900"
         >
           Reset
         </button>
-        {!allAnswered && (
-          <span className="text-sm text-slate-600">You can view partial results anytime.</span>
-        )}
+        {completeness < 1 && <span className="text-sm text-slate-600">You can view partial results anytime.</span>}
       </div>
 
-      {/* Results */}
       {submitted && (
         <section className="mt-8">
           <h2 className="mb-3 text-xl font-semibold">Match by strategy</h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            {OPTIONS.map((s) => {
-              const stat = results[s];
-              const percent = pct(stat.percent);
+            {options.map((o) => {
+              const stat = results[o.key];
+              const percent = pct(stat?.percent || 0);
               return (
                 <ResultCard
-                  key={s}
-                  option={s}
+                  key={o.key}
+                  optionKey={o.key}
+                  label={o.short}
                   percent={percent}
                   isTop={percent === best}
-                  expanded={s === expanded}
-                  mismatches={stat.mismatches}
-                  onToggle={() => setExpanded((e) => (e === s ? null : s))}
-                  onLearnMore={() => navigate(`/learn/${s}`)}
-                  idealFor={(qid) => (QUESTIONS.find((x) => x.id === qid)!.answers[s] ? "Yes" : "No")}
+                  expanded={expanded === o.key}
+                  mismatches={stat?.mismatches || []}
+                  onToggle={() => setExpanded((e) => (e === o.key ? null : o.key))}
+                  learnHref={`#/${slug}/learn/${o.key}`}
+                  idealFor={(qid) => (questions.find((x) => x.id === qid)!.answers[o.key] ? "Yes" : "No")}
                   youChose={(qid) => (answers[qid - 1] ? "Yes" : "No")}
-                  questionText={(qid) => QUESTIONS.find((x) => x.id === qid)!.text}
+                  questionText={(qid) => questions.find((x) => x.id === qid)!.text}
                 />
               );
             })}
           </div>
 
           <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-700 shadow-sm">
-            <p>
-              Tip: a high match suggests the strategy can satisfy your constraints, but many real
-              apps combine strategies per route or page. Use this as a directional guide, not a hard rule.
-            </p>
+            <p>Tip: a high match suggests the strategy can satisfy your constraints, but many real apps combine strategies per route or page.</p>
           </div>
         </section>
       )}
 
       <footer className="mt-10 text-center text-xs text-slate-500">
-        <p>Built with React + Tailwind. {QUESTIONS.length} questions · Yes/No. No data leaves your browser.</p>
+        <p>Built with React + Tailwind. {questions.length} questions · Yes/No. No data leaves your browser.</p>
       </footer>
     </div>
   );

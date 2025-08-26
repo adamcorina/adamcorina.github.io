@@ -1,15 +1,6 @@
-export const OPTIONS = ["SSG", "ISR", "SSR", "ESR", "CSR"] as const;
+import type { Question } from "../../types/Question";
 
-export type Option = typeof OPTIONS[number];
-
-export type Question = {
-  id: number;
-  text: string;
-  techText: string;
-  answers: Record<Option, boolean>;
-};
-
-export const QUESTIONS: Question[] = [
+export const QUESTIONS: Question<typeof OPTIONS>[] = [
   // 1) Fundamentals
   {
     id: 1,
