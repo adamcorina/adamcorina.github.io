@@ -1,4 +1,5 @@
 import type { Question } from "../../types/Question";
+import type { OPTIONS } from "./options";
 
 export const QUESTIONS: Question<typeof OPTIONS>[] = [
   // 1) Fundamentals

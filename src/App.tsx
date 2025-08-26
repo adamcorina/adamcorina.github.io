@@ -2,6 +2,7 @@ import Quiz from "./routes/Quiz";
 import Learn from "./routes/Learn";
 import { useHashRoute } from "./lib/router";
 import { QUIZZES, DEFAULT_QUIZ } from "./registry";
+import { HeadTags } from "./components/SEO";
 
 export default function App() {
   const route = useHashRoute();
@@ -10,6 +11,7 @@ export default function App() {
     const quiz = QUIZZES[DEFAULT_QUIZ];
     return (
       <div className="min-h-screen w-full bg-slate-50 text-slate-900">
+        <HeadTags route={route} quiz={quiz} />
         <Quiz quiz={quiz} />
       </div>
     );
@@ -19,6 +21,7 @@ export default function App() {
     const quiz = QUIZZES[route.quiz];
     return (
       <div className="min-h-screen w-full bg-slate-50 text-slate-900">
+        <HeadTags route={route} quiz={quiz} />
         <Quiz quiz={quiz} />
       </div>
     );
@@ -28,6 +31,7 @@ export default function App() {
   const quiz = QUIZZES[route.quiz];
   return (
     <div className="min-h-screen w-full bg-slate-50 text-slate-900">
+      <HeadTags route={route} quiz={quiz} optionKey={route.option}/>
       <Learn quiz={quiz} optionKey={route.option} />
     </div>
   );

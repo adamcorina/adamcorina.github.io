@@ -13,10 +13,26 @@ export const DEFAULT_QUIZ: QUIZ_TYPES = QUIZ_TYPES.RENDERING;
 
 export const RENDERING_QUIZ = makeQuiz({
   slug: "rendering",
-  name: "Rendering Frontend Apps",
+  name: "Frontend Rendering Strategy Guide",
   header: {
-    title: "Rendering Frontend Apps",
+    title: "Frontend Rendering Strategy Guide",
     intro: `Answer ${RENDERING_QS.length} quick yes/no questions to pinpoint the frontend rendering approach that fits your needs.`,
+    keywords: [
+      "frontend rendering",
+      "SSG",
+      "ISR",
+      "SSR",
+      "ESR",
+      "CSR",
+      "static site generation",
+      "server-side rendering",
+      "edge rendering",
+      "client-side rendering",
+      "React",
+      "Next.js",
+      "SEO",
+      "web performance",
+    ],
   },
     options: Object.keys(RENDERING_OPTS_LONG).map((k) => {
         const key = k as typeof RENDERING_OPTS[number];

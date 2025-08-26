@@ -22,7 +22,7 @@ export type OptionMeta<Options extends readonly string[]> = {
 export type QuizModule<Options extends readonly string[]> = {
   slug: string;
   name: string;
-  header: { title: string; intro: string };
+  header: { title: string; intro: string; keywords?: string[] };
   options: ReadonlyArray<OptionMeta<Options>>;
   questions: ReadonlyArray<Question<Options>>;
   approachInfo: Record<Options[number], ApproachInfoEntry>;
