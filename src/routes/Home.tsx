@@ -13,7 +13,7 @@ export default function Home() {
           className="pointer-events-none absolute -top-24 -right-20 h-72 w-72 rounded-full bg-white/10 blur-3xl"
         />
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Right Tool Selector — Tech Quizzes
+          Right Tool Finder — Tech Quizzes
         </h1>
         <p className="mt-3 max-w-2xl text-slate-200">
           Quick, opinionated quizzes that map your constraints to practical tech stack choices.

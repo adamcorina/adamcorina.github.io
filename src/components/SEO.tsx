@@ -3,13 +3,13 @@ import type { Route } from "../lib/router";
 
 const SITE = {
   url: "https://adamcorina.github.io",
-  name: "Right Tool Selector",
+  name: "Right Tool Finder",
   ogImage: "https://adamcorina.github.io/og.png",
   twitterCard: "summary_large_image",
 };
 
 export function HomeHeadTags() {
-  const title = "Right Tool Selector — Tech Quizzes";
+  const title = "Right Tool Finder — Tech Quizzes";
   const description =
     "Answer a few questions to choose the right frontend tools: rendering modes, styling strategies, and more.";
 

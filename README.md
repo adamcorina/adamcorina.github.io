@@ -1,4 +1,4 @@
-# Right Tool Selector — Tech Quizzes
+# Right Tool Finder — Tech Quizzes
 
 A tiny, fast React 19 + Vite app for interactive tech decision quizzes.
 Available quizzes:
