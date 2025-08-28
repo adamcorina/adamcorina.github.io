@@ -21,7 +21,7 @@ export default function Home() {
           Right Tool Finder — Tech Quizzes
         </h1>
         <p className="mt-3 max-w-2xl text-slate-200">
-          Quick, opinionated quizzes that map your constraints to practical tech stack choices.
+          Quick, opinionated quizzes that map your requirements and constraints to practical tech stack and tool choices.
           Pick a quiz, answer a few yes/no questions, and get tailored suggestions.
         </p>
       </section>
@@ -57,7 +57,6 @@ export default function Home() {
                     title={o.long}
                   >
                     <span className="font-medium">{o.short}</span>
-                    <span className="opacity-80"> — {o.long}</span>
                   </li>
                 ))}
               </ul>
