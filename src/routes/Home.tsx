@@ -2,9 +2,10 @@ import { QUIZZES } from "../registry";
 import { hrefQuiz } from "../lib/router";
 import HeroHeader from "../components/HeroHeader";
 
-const AREA_STYLES: Record<"frontend" | "backend", string> = {
+const AREA_STYLES: Record<"frontend" | "backend" | "infra", string> = {
   frontend: "bg-emerald-50 text-emerald-700 ring-emerald-200",
   backend: "bg-indigo-50 text-indigo-700 ring-indigo-200",
+  infra: "bg-orange-50 text-orange-700 ring-orange-200",
 };
 
 export default function Home() {
@@ -39,7 +40,7 @@ export default function Home() {
                       className={`rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${badgeClass}`}
                       title={`${quiz.area} quiz`}
                     >
-                      {quiz.area === "frontend" ? "Frontend" : "Backend"}
+                      {quiz.area.toUpperCase()}
                     </span>
                   </div>
                   <p className="mt-2 text-slate-600">{quiz.header.intro}</p>

@@ -1,4 +1,5 @@
-export const OPTIONS = ["MONO", "SERVERLESS", "MICRO"] as const;
+import type { OPTIONS } from "./options";
+
 export type Option = (typeof OPTIONS)[number];
 
 export type Question = {
@@ -89,7 +90,7 @@ export const QUESTIONS: ReadonlyArray<Question> = [
     id: 10,
     text: "Do you want managed async tasks and scheduling out of the box—queues/events/cron with retries & DLQs (e.g., SQS/SNS + EventBridge, Cloudflare Queues + Cron Triggers, Vercel Cron) without running your own workers?",
     techText:
-      "Needs managed queues/events/schedulers with at-least-once delivery, retries, and dead-letter queues—no custom worker infrastructure.",
+      "Needs managed queues/events/schedulers with at-least-once delivery, retries, and dead-letter queues—no custom worker infra.",
     answers: { MONO: false, SERVERLESS: true, MICRO: false },
   },
 ];

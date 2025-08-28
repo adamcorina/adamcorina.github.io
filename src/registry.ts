@@ -21,10 +21,18 @@ import {
 } from "./data/server/options";
 import { APPROACH_INFO as SERVER_INFO } from "./data/server/approachInfo";
 
+import { QUESTIONS as CACHING_QS } from "./data/caching/questions";
+import {
+  OPTIONS as CACHING_OPTS,
+  OPTIONS_LONG as CACHING_OPTS_LONG,
+} from "./data/caching/options";
+import { APPROACH_INFO as CACHING_INFO } from "./data/caching/approachInfo";
+
 export const QUIZ_TYPES = {
   RENDERING: "rendering",
   STYLING: "styling",
   SERVER: "server",
+  CACHING: "caching",
 } as const;
 
 export type QUIZ_TYPES = (typeof QUIZ_TYPES)[keyof typeof QUIZ_TYPES];
@@ -159,8 +167,51 @@ export const SERVER_QUIZ = makeQuiz({
   approachInfo: SERVER_INFO,
 } satisfies QuizModule<typeof SERVER_OPTS>);
 
+export const CACHING_QUIZ = makeQuiz({
+  slug: "caching",
+  name: "Caching Strategy Guide",
+  area: "infra",
+  header: {
+    title: "Web Caching Strategy Guide",
+    intro: `Answer ${CACHING_QS.length} quick questions to pick the right caching layers for your app (HTTP/edge, client cache, server cache, or database-level caching).`,
+    keywords: [
+      "web caching",
+      "http caching",
+      "cdn",
+      "cache-control",
+      "etag",
+      "service worker",
+      "query cache",
+      "stale-while-revalidate",
+      "redis",
+      "memcached",
+      "database caching",
+      "read replicas",
+      "materialized views",
+      "TanStack Query",
+      "SWR",
+    ],
+  },
+  options: Object.keys(CACHING_OPTS_LONG).map((k) => {
+    const key = k as (typeof CACHING_OPTS)[number];
+    return {
+      key,
+      short: key,
+      long: CACHING_OPTS_LONG[key],
+    };
+  }),
+  questions: CACHING_QS.map((q) => ({
+    id: q.id,
+    text: q.text,
+    techText: q.techText,
+    answers: q.answers,
+  })),
+  approachInfo: CACHING_INFO,
+} satisfies QuizModule<typeof CACHING_OPTS>);
+
 export const QUIZZES = {
   [QUIZ_TYPES.RENDERING]: RENDERING_QUIZ,
   [QUIZ_TYPES.STYLING]: STYLING_QUIZ,
   [QUIZ_TYPES.SERVER]: SERVER_QUIZ,
+  [QUIZ_TYPES.CACHING]: CACHING_QUIZ,
 } as const;

@@ -5,7 +5,7 @@ export type Question<Options extends readonly string[]> = {
   answers: Record<Options[number], boolean>;
 };
 
-export type QuizArea = "frontend" | "backend";
+export type QuizArea = "frontend" | "backend" | "infra";
 
 export type ApproachInfoEntry = {
   label: string;
