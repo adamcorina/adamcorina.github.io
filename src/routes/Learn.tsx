@@ -29,7 +29,7 @@ export default function GenericLearn<Options extends readonly string[]>({
     <div className="mx-auto max-w-3xl px-4 py-8">
       <button
         onClick={() => (window.location.hash = `#/${quiz.slug}`)}
-        className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-slate-700 underline underline-offset-4"
+        className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-slate-700 underline underline-offset-4 cursor-pointer"
       >← Back to quiz</button>
 
       <h1 className="text-3xl font-semibold tracking-tight">{info.label}</h1>

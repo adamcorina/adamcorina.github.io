@@ -8,9 +8,14 @@ import {  QUESTIONS as STYLE_QS } from "./data/styling/questions";
 import { OPTIONS as STYLE_OPTS, OPTIONS_LONG as STYLE_OPTS_LONG } from "./data/styling/options"
 import { APPROACH_INFO as STYLE_INFO } from "./data/styling/approachInfo";
 
+import { QUESTIONS as SERVER_QS } from "./data/server/questions";
+import { OPTIONS as SERVER_OPTS, OPTIONS_LONG as SERVER_OPTS_LONG } from "./data/server/options";
+import { APPROACH_INFO as SERVER_INFO } from "./data/server/approachInfo";
+
 export const QUIZ_TYPES = {
   RENDERING: "rendering",
   STYLING: "styling",
+  SERVER: "server",
 } as const;
 
 export type QUIZ_TYPES = typeof QUIZ_TYPES[keyof typeof QUIZ_TYPES];
@@ -99,7 +104,52 @@ export const STYLING_QUIZ = makeQuiz({
   approachInfo: STYLE_INFO,
 } satisfies QuizModule<typeof STYLE_OPTS>);
 
+export const SERVER_QUIZ = makeQuiz({
+  slug: "server",
+  name: "Backend Architecture Guide",
+  header: {
+    title: "Backend Architecture Guide",
+    intro: `Answer ${SERVER_QS.length} quick questions to choose between a serverful monolith, serverless, or microservices—using Node.js/TypeScript examples.`,
+    keywords: [
+      "backend architecture",
+      "Node.js",
+      "TypeScript",
+      "Express",
+      "NestJS",
+      "Fastify",
+      "serverless",
+      "AWS Lambda",
+      "Vercel Functions",
+      "Cloudflare Workers",
+      "microservices",
+      "Kubernetes",
+      "KafkaJS",
+      "OpenTelemetry",
+      "Prisma",
+      "Postgres",
+      "Docker",
+    ],
+  },
+  options: Object.keys(SERVER_OPTS_LONG).map((k) => {
+        const key = k as typeof SERVER_OPTS[number];
+        return {
+            key,
+            short: key,
+            long: SERVER_OPTS_LONG[key],
+        }
+    }),
+  questions: SERVER_QS.map((q) => ({
+    id: q.id,
+    text: q.text,
+    techText: (q).techText,
+    answers: q.answers,
+  })),
+  approachInfo: SERVER_INFO,
+} satisfies QuizModule<typeof SERVER_OPTS>);
+
+
 export const QUIZZES = {
   [QUIZ_TYPES.RENDERING]: RENDERING_QUIZ,
   [QUIZ_TYPES.STYLING]: STYLING_QUIZ,
+  [QUIZ_TYPES.SERVER]: SERVER_QUIZ,
 } as const;

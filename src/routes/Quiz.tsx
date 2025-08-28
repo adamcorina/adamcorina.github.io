@@ -46,6 +46,10 @@ export default function GenericQuiz<Options extends readonly string[]>({
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
+          <button
+        onClick={() => (window.location.hash = `#/`)}
+        className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-slate-700 underline underline-offset-4 cursor-pointer"
+      >← Back to homepage</button>
     <QuizHeader
         title={header.title}
         intro={header.intro}
