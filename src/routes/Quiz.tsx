@@ -4,14 +4,14 @@ import { pct } from "../lib/utils";
 import ProgressBar from "../components/ProgressBar";
 import QuestionCard from "../components/QuestionCard";
 import ResultCard from "../components/ResultCard";
-import QuizHeader from "../components/QuizHeader";
+import HeroHeader from "../components/HeroHeader";
 
 export default function GenericQuiz<Options extends readonly string[]>({
   quiz,
 }: { quiz: QuizModule<Options> }) {
   type OptionKey = Options[number];
 
-  const { questions, options, header, slug } = quiz;
+  const { questions, options, slug } = quiz;
   const [answers, setAnswers] = useState<(boolean | null)[]>(Array(questions.length).fill(null));
   const [submitted, setSubmitted] = useState(false);
   const [expanded, setExpanded] = useState<OptionKey | null>(null);
@@ -50,11 +50,30 @@ export default function GenericQuiz<Options extends readonly string[]>({
         onClick={() => (window.location.hash = `#/`)}
         className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-slate-700 underline underline-offset-4 cursor-pointer"
       >← Back to homepage</button>
-    <QuizHeader
-        title={header.title}
-        intro={header.intro}
-        options={options.map((o) => ({ short: o.short, long: o.long }))}
-    />
+    <HeroHeader
+        variant="light"
+        title={quiz.header.title}
+        intro={quiz.header.intro}
+        badge={{
+            text: quiz.area === "frontend" ? "Frontend" : "Backend",
+            tone: quiz.area === "frontend" ? "emerald" : "indigo",
+        }}
+        meta={`${quiz.questions.length} questions · ${quiz.options.length} options`}
+    >
+        {/* Option pills */}
+        <ul className="mt-6 flex flex-wrap gap-2">
+          {options.map((o) => (
+            <li
+              key={o.short}
+              className="rounded-full bg-slate-100 px-3 py-1 text-sm leading-6 ring-1 ring-inset ring-slate-200 text-slate-800"
+              title={o.long}
+            >
+              <span className="font-medium">{o.short}</span>
+              <span className="opacity-80"> — {o.long}</span>
+            </li>
+          ))}
+        </ul>
+    </HeroHeader>
 
       <div className="mb-6"><ProgressBar percent={pct(completeness)} /></div>
 

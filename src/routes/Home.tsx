@@ -1,5 +1,6 @@
 import { QUIZZES } from "../registry";
 import { hrefQuiz } from "../lib/router";
+import HeroHeader from "../components/HeroHeader";
 
 const AREA_STYLES: Record<"frontend" | "backend", string> = {
   frontend: "bg-emerald-50 text-emerald-700 ring-emerald-200",
@@ -11,20 +12,12 @@ export default function Home() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      {/* Hero */}
-      <section className="relative mb-10 overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-900 to-slate-800 p-8 text-white shadow-lg sm:p-12">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-24 -right-20 h-72 w-72 rounded-full bg-white/10 blur-3xl"
-        />
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Right Tool Finder — Tech Quizzes
-        </h1>
-        <p className="mt-3 max-w-2xl text-slate-200">
-          Quick, opinionated quizzes that map your requirements and constraints to practical tech stack and tool choices.
-          Pick a quiz, answer a few yes/no questions, and get tailored suggestions.
-        </p>
-      </section>
+      <HeroHeader
+        variant="dark"
+        title="Tech Quizzes - Pick the Right Tools"
+        intro="Quick, opinionated quizzes that map your requirements and constraints to practical tech stack and tool choices.
+          Pick a quiz, answer a few yes/no questions, and get tailored suggestions."
+      />
 
       {/* Cards */}
       <section className="grid gap-6 md:grid-cols-2">

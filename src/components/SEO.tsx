@@ -2,9 +2,9 @@ import type { QuizModule } from "../types/Question";
 import type { Route } from "../lib/router";
 
 const SITE = {
-  url: "https://adamcorina.github.io",
+  url: "https://tech-quizzes.velea.cc",
   name: "Right Tool Finder",
-  ogImage: "https://adamcorina.github.io/og.png",
+  ogImage: "https://tech-quizzes.velea.cc/og.png",
   twitterCard: "summary_large_image",
 };
 
