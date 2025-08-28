@@ -8,58 +8,79 @@ import HeroHeader from "../components/HeroHeader";
 
 export default function GenericQuiz<Options extends readonly string[]>({
   quiz,
-}: { quiz: QuizModule<Options> }) {
+}: {
+  quiz: QuizModule<Options>;
+}) {
   type OptionKey = Options[number];
 
   const { questions, options, slug } = quiz;
-  const [answers, setAnswers] = useState<(boolean | null)[]>(Array(questions.length).fill(null));
+  const [answers, setAnswers] = useState<(boolean | null)[]>(
+    Array(questions.length).fill(null),
+  );
   const [submitted, setSubmitted] = useState(false);
   const [expanded, setExpanded] = useState<OptionKey | null>(null);
 
   const completeness = useMemo(
     () => answers.filter((a) => a !== null).length / questions.length,
-    [answers, questions.length]
+    [answers, questions.length],
   );
 
   const results = useMemo(() => {
     type Stat = { matches: number; percent: number; mismatches: number[] };
-    const init = Object.fromEntries(options.map(o => [o.key, { matches: 0, percent: 0, mismatches: [] as number[] }])) as Record<OptionKey, Stat>;
+    const init = Object.fromEntries(
+      options.map((o) => [
+        o.key,
+        { matches: 0, percent: 0, mismatches: [] as number[] },
+      ]),
+    ) as Record<OptionKey, Stat>;
 
-    const idxs = answers.map((a, i) => (a === null ? -1 : i)).filter(i => i >= 0);
+    const idxs = answers
+      .map((a, i) => (a === null ? -1 : i))
+      .filter((i) => i >= 0);
     const total = idxs.length || questions.length;
     if (idxs.length === 0) return init;
 
     const stats = { ...init };
     for (const opt of options) {
-      let m = 0; const mm: number[] = [];
+      let m = 0;
+      const mm: number[] = [];
       for (const i of idxs) {
         const ok = answers[i] === !!questions[i].answers[opt.key];
-        if (ok) m += 1; else mm.push(questions[i].id);
+        if (ok) m += 1;
+        else mm.push(questions[i].id);
       }
       stats[opt.key] = { matches: m, percent: m / total, mismatches: mm };
     }
     return stats;
   }, [answers, options, questions]);
 
-  const best = Math.max(...options.map((o) => pct(results[o.key]?.percent || 0)));
-  const reset = () => { setAnswers(Array(questions.length).fill(null)); setSubmitted(false); setExpanded(null); };
+  const best = Math.max(
+    ...options.map((o) => pct(results[o.key]?.percent || 0)),
+  );
+  const reset = () => {
+    setAnswers(Array(questions.length).fill(null));
+    setSubmitted(false);
+    setExpanded(null);
+  };
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
-          <button
+      <button
         onClick={() => (window.location.hash = `#/`)}
         className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-slate-700 underline underline-offset-4 cursor-pointer"
-      >← Back to homepage</button>
-    <HeroHeader
+      >
+        ← Back to homepage
+      </button>
+      <HeroHeader
         variant="light"
         title={quiz.header.title}
         intro={quiz.header.intro}
         badge={{
-            text: quiz.area === "frontend" ? "Frontend" : "Backend",
-            tone: quiz.area === "frontend" ? "emerald" : "indigo",
+          text: quiz.area === "frontend" ? "Frontend" : "Backend",
+          tone: quiz.area === "frontend" ? "emerald" : "indigo",
         }}
         meta={`${quiz.questions.length} questions · ${quiz.options.length} options`}
-    >
+      >
         {/* Option pills */}
         <ul className="mt-6 flex flex-wrap gap-2">
           {options.map((o) => (
@@ -73,9 +94,11 @@ export default function GenericQuiz<Options extends readonly string[]>({
             </li>
           ))}
         </ul>
-    </HeroHeader>
+      </HeroHeader>
 
-      <div className="mb-6"><ProgressBar percent={pct(completeness)} /></div>
+      <div className="mb-6">
+        <ProgressBar percent={pct(completeness)} />
+      </div>
 
       <div className="space-y-4">
         {questions.map((q, idx) => (
@@ -85,7 +108,9 @@ export default function GenericQuiz<Options extends readonly string[]>({
             text={q.text}
             value={answers[idx]}
             onAnswer={(val) => {
-              const next = [...answers]; next[idx] = val; setAnswers(next);
+              const next = [...answers];
+              next[idx] = val;
+              setAnswers(next);
             }}
           />
         ))}
@@ -106,7 +131,11 @@ export default function GenericQuiz<Options extends readonly string[]>({
         >
           Reset
         </button>
-        {completeness < 1 && <span className="text-sm text-slate-600">You can view partial results anytime.</span>}
+        {completeness < 1 && (
+          <span className="text-sm text-slate-600">
+            You can view partial results anytime.
+          </span>
+        )}
       </div>
 
       {submitted && (
@@ -125,24 +154,39 @@ export default function GenericQuiz<Options extends readonly string[]>({
                   isTop={percent === best}
                   expanded={expanded === o.key}
                   mismatches={stat?.mismatches || []}
-                  onToggle={() => setExpanded((e) => (e === o.key ? null : o.key))}
+                  onToggle={() =>
+                    setExpanded((e) => (e === o.key ? null : o.key))
+                  }
                   learnHref={`#/${slug}/learn/${o.key}`}
-                  idealFor={(qid) => (questions.find((x) => x.id === qid)!.answers[o.key] ? "Yes" : "No")}
+                  idealFor={(qid) =>
+                    questions.find((x) => x.id === qid)!.answers[o.key]
+                      ? "Yes"
+                      : "No"
+                  }
                   youChose={(qid) => (answers[qid - 1] ? "Yes" : "No")}
-                  questionText={(qid) => questions.find((x) => x.id === qid)!.text}
+                  questionText={(qid) =>
+                    questions.find((x) => x.id === qid)!.text
+                  }
                 />
               );
             })}
           </div>
 
           <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-700 shadow-sm">
-            <p>Tip: a high match suggests the strategy can satisfy your constraints, but many real apps combine strategies per route or page.</p>
+            <p>
+              Tip: a high match suggests the strategy can satisfy your
+              constraints, but many real apps combine strategies per route or
+              page.
+            </p>
           </div>
         </section>
       )}
 
       <footer className="mt-10 text-center text-xs text-slate-500">
-        <p>Built with React + Tailwind. {questions.length} questions · Yes/No. No data leaves your browser.</p>
+        <p>
+          Built with React + Tailwind. {questions.length} questions · Yes/No. No
+          data leaves your browser.
+        </p>
       </footer>
     </div>
   );

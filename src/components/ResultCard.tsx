@@ -2,17 +2,17 @@ import { cx } from "../lib/utils";
 
 type Props = {
   optionKey: string;
-  label: string;                 // e.g. "SSG"
-  percent: number;               // 0..100
+  label: string; // e.g. "SSG"
+  percent: number; // 0..100
   isTop: boolean;
   expanded: boolean;
   mismatches: number[];
   onToggle: () => void;
-  learnHref: string;             // e.g. #/learn/rendering/SSR
+  learnHref: string; // e.g. #/learn/rendering/SSR
   idealFor: (qid: number) => "Yes" | "No";
   youChose: (qid: number) => "Yes" | "No";
   questionText: (qid: number) => string;
-  onLearnClick?: () => void;     // optional (analytics)
+  onLearnClick?: () => void; // optional (analytics)
 };
 
 export default function ResultCard({
@@ -33,7 +33,7 @@ export default function ResultCard({
     <div
       className={cx(
         "rounded-2xl border bg-white p-4 shadow-sm",
-        isTop ? "border-slate-900" : "border-slate-200"
+        isTop ? "border-slate-900" : "border-slate-200",
       )}
     >
       <div className="flex items-center justify-between">
@@ -84,7 +84,8 @@ export default function ResultCard({
               <li key={`${optionKey}-${qid}`}>
                 Q{qid}: expected{" "}
                 <span className="font-medium">{idealFor(qid)}</span>, you chose{" "}
-                <span className="font-medium">{youChose(qid)}</span> – {questionText(qid)}
+                <span className="font-medium">{youChose(qid)}</span> –{" "}
+                {questionText(qid)}
               </li>
             ))
           )}

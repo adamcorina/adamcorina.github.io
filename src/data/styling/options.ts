@@ -1,4 +1,10 @@
-export const OPTIONS = ["CSS++", "FUNCTIONAL", "STYLE-SYSTEM", "HEADLESS", "COMPONENT-SYSTEM"] as const;
+export const OPTIONS = [
+  "CSS++",
+  "FUNCTIONAL",
+  "STYLE-SYSTEM",
+  "HEADLESS",
+  "COMPONENT-SYSTEM",
+] as const;
 
 export const OPTIONS_LONG: Record<(typeof OPTIONS)[number], string> = {
   "CSS++": "CSS++ (Modern CSS / Sass / Modules)",

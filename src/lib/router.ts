@@ -27,7 +27,11 @@ export function parseHash(): Route {
   }
   // #/learn/:slug/:option
   if (parts.length === 3 && parts[0] === "learn" && isQuizSlug(parts[1])) {
-    return { page: "learn", quiz: parts[1], option: decodeURIComponent(parts[2]) };
+    return {
+      page: "learn",
+      quiz: parts[1],
+      option: decodeURIComponent(parts[2]),
+    };
   }
 
   // Back-compat: #/:slug
@@ -36,11 +40,19 @@ export function parseHash(): Route {
   }
   // Back-compat: #/:slug/learn/:option
   if (parts.length === 3 && isQuizSlug(parts[0]) && parts[1] === "learn") {
-    return { page: "learn", quiz: parts[0], option: decodeURIComponent(parts[2]) };
+    return {
+      page: "learn",
+      quiz: parts[0],
+      option: decodeURIComponent(parts[2]),
+    };
   }
   // Back-compat: #/learn/:option -> default quiz
   if (parts.length === 2 && parts[0] === "learn") {
-    return { page: "learn", quiz: DEFAULT_QUIZ, option: decodeURIComponent(parts[1]) };
+    return {
+      page: "learn",
+      quiz: DEFAULT_QUIZ,
+      option: decodeURIComponent(parts[1]),
+    };
   }
 
   // Home (default)
@@ -61,7 +73,8 @@ export function navigate(to: string) {
 }
 export const navHome = () => navigate(hrefHome());
 export const navQuiz = (quiz: QuizSlug) => navigate(hrefQuiz(quiz));
-export const navLearn = (quiz: QuizSlug, option: string) => navigate(hrefLearn(quiz, option));
+export const navLearn = (quiz: QuizSlug, option: string) =>
+  navigate(hrefLearn(quiz, option));
 
 /* ---------- hook ---------- */
 import { useEffect, useState } from "react";

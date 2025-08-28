@@ -54,7 +54,7 @@ export default function HeroHeader({
       className={cx(
         "relative mb-8 overflow-hidden rounded-3xl border p-8 shadow-sm sm:p-12",
         VARIANT[variant],
-        className
+        className,
       )}
     >
       {/* subtle flare only on dark */}
@@ -74,7 +74,7 @@ export default function HeroHeader({
                   "rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset",
                   variant === "dark"
                     ? "bg-white/10 text-white ring-white/20"
-                    : "bg-slate-100 text-slate-800 ring-slate-200"
+                    : "bg-slate-100 text-slate-800 ring-slate-200",
                 )}
               >
                 {eyebrow}
@@ -84,7 +84,7 @@ export default function HeroHeader({
               <span
                 className={cx(
                   "rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset",
-                  BADGE[badge.tone ?? "slate"]
+                  BADGE[badge.tone ?? "slate"],
                 )}
                 title={badge.text}
               >
@@ -94,7 +94,12 @@ export default function HeroHeader({
           </div>
         )}
 
-        <h1 className={cx("text-3xl font-semibold tracking-tight", variant === "dark" ? "sm:text-4xl" : "sm:text-3xl")}>
+        <h1
+          className={cx(
+            "text-3xl font-semibold tracking-tight",
+            variant === "dark" ? "sm:text-4xl" : "sm:text-3xl",
+          )}
+        >
           {title}
         </h1>
 
@@ -102,7 +107,7 @@ export default function HeroHeader({
           <p
             className={cx(
               "mt-3 max-w-2xl",
-              variant === "dark" ? "text-slate-200" : "text-slate-600"
+              variant === "dark" ? "text-slate-200" : "text-slate-600",
             )}
           >
             {intro}
@@ -115,7 +120,7 @@ export default function HeroHeader({
               <span
                 className={cx(
                   "text-xs",
-                  variant === "dark" ? "text-slate-300" : "text-slate-500"
+                  variant === "dark" ? "text-slate-300" : "text-slate-500",
                 )}
               >
                 {meta}
@@ -131,7 +136,7 @@ export default function HeroHeader({
         <div
           className={cx(
             "relative z-10 mt-5",
-            variant === "dark" ? "text-white" : "text-slate-900"
+            variant === "dark" ? "text-white" : "text-slate-900",
           )}
         >
           {children}

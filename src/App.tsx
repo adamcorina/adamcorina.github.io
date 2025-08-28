@@ -31,7 +31,7 @@ export default function App() {
   const quiz = QUIZZES[route.quiz];
   return (
     <div className="min-h-screen w-full bg-slate-50 text-slate-900">
-      <HeadTags route={route} quiz={quiz} optionKey={route.option}/>
+      <HeadTags route={route} quiz={quiz} optionKey={route.option} />
       <Learn quiz={quiz} optionKey={route.option} />
     </div>
   );

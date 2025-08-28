@@ -1,12 +1,11 @@
 export type Question<Options extends readonly string[]> = {
   id: number;
-  text: string;      // business wording
-  techText: string;  // technical affirmation
+  text: string; // business wording
+  techText: string; // technical affirmation
   answers: Record<Options[number], boolean>;
 };
 
 export type QuizArea = "frontend" | "backend";
-
 
 export type ApproachInfoEntry = {
   label: string;
@@ -34,7 +33,7 @@ export type QuizModule<Options extends readonly string[]> = {
 
 // helper to preserve the Options literal type when registering quizzes
 export function makeQuiz<Options extends readonly string[]>(
-  quiz: QuizModule<Options>
+  quiz: QuizModule<Options>,
 ) {
   return quiz;
 }

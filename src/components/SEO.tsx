@@ -34,8 +34,8 @@ function renderKeywords(keywords?: string[]) {
   return <meta name="keywords" content={keywords.join(", ")} />;
 }
 
-const toKeywords = (arr?: string[]) => (arr && arr.length ? arr.join(", ") : undefined);
-
+const toKeywords = (arr?: string[]) =>
+  arr && arr.length ? arr.join(", ") : undefined;
 
 export function HeadTags({
   route,
@@ -89,9 +89,9 @@ export function HeadTags({
   const info = quiz.approachInfo[optionKey!];
   const title = `${info.label} — ${SITE.name}`;
   const description = `${info.label}: when to use it, tech requirements it satisfies, common use cases, and popular frameworks.`;
-  
+
   const learnKeywords = quiz.header.keywords;
-    
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "TechArticle",

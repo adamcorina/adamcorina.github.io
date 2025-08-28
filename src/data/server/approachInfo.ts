@@ -1,7 +1,10 @@
 import type { ApproachInfoEntry } from "../../types/Question";
 import type { OPTIONS } from "./options";
 
-export const APPROACH_INFO: Record<typeof OPTIONS[number], ApproachInfoEntry> = {
+export const APPROACH_INFO: Record<
+  (typeof OPTIONS)[number],
+  ApproachInfoEntry
+> = {
   MONO: {
     label: "Serverful Monolith (Node/TS)",
     blurb:

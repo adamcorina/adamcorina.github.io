@@ -1,7 +1,7 @@
 import type { OPTIONS } from "./options";
 
 export const APPROACH_INFO: Record<
-  typeof OPTIONS[number],
+  (typeof OPTIONS)[number],
   {
     label: string;
     blurb: string;

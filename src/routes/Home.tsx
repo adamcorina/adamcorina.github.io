@@ -22,21 +22,26 @@ export default function Home() {
       {/* Cards */}
       <section className="grid gap-6 md:grid-cols-2">
         {quizzes.map(([slug, quiz]) => {
-        const badgeClass = AREA_STYLES[quiz.area];
+          const badgeClass = AREA_STYLES[quiz.area];
 
-        return (
-            <article key={slug} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          return (
+            <article
+              key={slug}
+              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+            >
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="flex items-center justify-between gap-2">
-                    <h2 className="text-xl font-semibold">{quiz.header.title}</h2>
+                    <h2 className="text-xl font-semibold">
+                      {quiz.header.title}
+                    </h2>
                     <span
                       className={`rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${badgeClass}`}
                       title={`${quiz.area} quiz`}
                     >
                       {quiz.area === "frontend" ? "Frontend" : "Backend"}
                     </span>
-                </div>
+                  </div>
                   <p className="mt-2 text-slate-600">{quiz.header.intro}</p>
                 </div>
               </div>
@@ -57,7 +62,8 @@ export default function Home() {
               {/* Meta + actions */}
               <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
                 <div className="text-xs text-slate-500">
-                  {quiz.questions.length} questions · {quiz.options.length} options
+                  {quiz.questions.length} questions · {quiz.options.length}{" "}
+                  options
                 </div>
                 <div className="flex gap-2">
                   <a

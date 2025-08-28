@@ -1,15 +1,24 @@
 import { makeQuiz, type QuizModule } from "./types/Question";
 
 import { QUESTIONS as RENDERING_QS } from "./data/rendering/questions";
-import { OPTIONS as RENDERING_OPTS, OPTIONS_LONG as RENDERING_OPTS_LONG } from "./data/rendering/options";
+import {
+  OPTIONS as RENDERING_OPTS,
+  OPTIONS_LONG as RENDERING_OPTS_LONG,
+} from "./data/rendering/options";
 import { APPROACH_INFO as RENDERING_INFO } from "./data/rendering/approachInfo";
 
-import {  QUESTIONS as STYLE_QS } from "./data/styling/questions";
-import { OPTIONS as STYLE_OPTS, OPTIONS_LONG as STYLE_OPTS_LONG } from "./data/styling/options"
+import { QUESTIONS as STYLE_QS } from "./data/styling/questions";
+import {
+  OPTIONS as STYLE_OPTS,
+  OPTIONS_LONG as STYLE_OPTS_LONG,
+} from "./data/styling/options";
 import { APPROACH_INFO as STYLE_INFO } from "./data/styling/approachInfo";
 
 import { QUESTIONS as SERVER_QS } from "./data/server/questions";
-import { OPTIONS as SERVER_OPTS, OPTIONS_LONG as SERVER_OPTS_LONG } from "./data/server/options";
+import {
+  OPTIONS as SERVER_OPTS,
+  OPTIONS_LONG as SERVER_OPTS_LONG,
+} from "./data/server/options";
 import { APPROACH_INFO as SERVER_INFO } from "./data/server/approachInfo";
 
 export const QUIZ_TYPES = {
@@ -18,7 +27,7 @@ export const QUIZ_TYPES = {
   SERVER: "server",
 } as const;
 
-export type QUIZ_TYPES = typeof QUIZ_TYPES[keyof typeof QUIZ_TYPES];
+export type QUIZ_TYPES = (typeof QUIZ_TYPES)[keyof typeof QUIZ_TYPES];
 
 export const DEFAULT_QUIZ: QUIZ_TYPES = QUIZ_TYPES.RENDERING;
 
@@ -46,18 +55,18 @@ export const RENDERING_QUIZ = makeQuiz({
       "web performance",
     ],
   },
-    options: Object.keys(RENDERING_OPTS_LONG).map((k) => {
-        const key = k as typeof RENDERING_OPTS[number];
-        return {
-            key,
-            short: key,
-            long: RENDERING_OPTS_LONG[key],
-        }
-    }),
+  options: Object.keys(RENDERING_OPTS_LONG).map((k) => {
+    const key = k as (typeof RENDERING_OPTS)[number];
+    return {
+      key,
+      short: key,
+      long: RENDERING_OPTS_LONG[key],
+    };
+  }),
   questions: RENDERING_QS.map((q) => ({
     id: q.id,
     text: q.text,
-    techText: (q).techText,
+    techText: q.techText,
     answers: q.answers,
   })),
   // Strongly typed: must include keys for every option literal
@@ -90,17 +99,17 @@ export const STYLING_QUIZ = makeQuiz({
     ],
   },
   options: Object.keys(STYLE_OPTS_LONG).map((k) => {
-        const key = k as typeof STYLE_OPTS[number];
-        return {
-            key,
-            short: key,
-            long: STYLE_OPTS_LONG[key],
-        }
-    }),
+    const key = k as (typeof STYLE_OPTS)[number];
+    return {
+      key,
+      short: key,
+      long: STYLE_OPTS_LONG[key],
+    };
+  }),
   questions: STYLE_QS.map((q) => ({
     id: q.id,
     text: q.text,
-    techText: (q).techText,
+    techText: q.techText,
     answers: q.answers,
   })),
   approachInfo: STYLE_INFO,
@@ -134,22 +143,21 @@ export const SERVER_QUIZ = makeQuiz({
     ],
   },
   options: Object.keys(SERVER_OPTS_LONG).map((k) => {
-        const key = k as typeof SERVER_OPTS[number];
-        return {
-            key,
-            short: key,
-            long: SERVER_OPTS_LONG[key],
-        }
-    }),
+    const key = k as (typeof SERVER_OPTS)[number];
+    return {
+      key,
+      short: key,
+      long: SERVER_OPTS_LONG[key],
+    };
+  }),
   questions: SERVER_QS.map((q) => ({
     id: q.id,
     text: q.text,
-    techText: (q).techText,
+    techText: q.techText,
     answers: q.answers,
   })),
   approachInfo: SERVER_INFO,
 } satisfies QuizModule<typeof SERVER_OPTS>);
-
 
 export const QUIZZES = {
   [QUIZ_TYPES.RENDERING]: RENDERING_QUIZ,
