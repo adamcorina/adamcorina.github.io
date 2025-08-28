@@ -3,7 +3,7 @@ import type { ApproachInfoEntry } from "../../types/Question";
 import type { Option as CachingOption } from "./questions";
 
 export const APPROACH_INFO: Record<CachingOption, ApproachInfoEntry> = {
-  "HTTP_EDGE": {
+  HTTP_EDGE: {
     label: "HTTP & Edge Cache (Browser/CDN/Proxy)",
     blurb:
       "Cache public content close to users using Cache-Control/ETag and CDN rules. Great for assets, public HTML/API responses, and edge image transforms. Supports fast global delivery and programmable purges. Avoid caching personalized responses here unless carefully scoped.",
@@ -27,7 +27,7 @@ export const APPROACH_INFO: Record<CachingOption, ApproachInfoEntry> = {
     ],
   },
 
-  "CLIENT_CACHE": {
+  CLIENT_CACHE: {
     label: "Client Cache (Service Worker & Query Cache)",
     blurb:
       "Speed up repeat views with an app-level data cache and optionally work offline with a Service Worker. Use SW Cache Storage for shell/assets and a query cache for API data (dedupe, retries, SWR). You may persist to IndexedDB for resilience; skip persistence when policy forbids client storage.",
@@ -50,7 +50,7 @@ export const APPROACH_INFO: Record<CachingOption, ApproachInfoEntry> = {
     ],
   },
 
-  "SERVER_CACHE": {
+  SERVER_CACHE: {
     label: "Server Cache (In-Process & Distributed)",
     blurb:
       "Cache on the server for ultra-low latency and safe handling of personalized data. Use in-process LRU for nanosecond reads within a single instance; add Redis/Memcached for cross-instance sharing (sessions, rate limits, computed results). Supports single-flight/coalescing and programmable invalidation.",
@@ -74,7 +74,7 @@ export const APPROACH_INFO: Record<CachingOption, ApproachInfoEntry> = {
     ],
   },
 
-  "DB_CACHE": {
+  DB_CACHE: {
     label: "Database-Level Caching (Replicas & Materialized Views)",
     blurb:
       "Scale heavy reads inside the data tier. Route reads to replicas for throughput and locality; precompute expensive aggregations via materialized views or summary tables. Accept eventual consistency or design for read-after-write when required.",

@@ -16,10 +16,10 @@ export const QUESTIONS: ReadonlyArray<Question> = [
     techText:
       "Needs a client-side cache: Service Worker/App-Shell and/or a query cache (SWR) with optional IndexedDB persistence.",
     answers: {
-      "HTTP_EDGE": false,
-      "CLIENT_CACHE": true,
-      "SERVER_CACHE": false,
-      "DB_CACHE": false,
+      HTTP_EDGE: false,
+      CLIENT_CACHE: true,
+      SERVER_CACHE: false,
+      DB_CACHE: false,
     },
   },
 
@@ -29,10 +29,10 @@ export const QUESTIONS: ReadonlyArray<Question> = [
     techText:
       "Needs HTTP/edge caching (browser/CDN/reverse proxy) with TTLs and cache-busting via fingerprinted URLs.",
     answers: {
-      "HTTP_EDGE": true,
-      "CLIENT_CACHE": false,
-      "SERVER_CACHE": false,
-      "DB_CACHE": false,
+      HTTP_EDGE: true,
+      CLIENT_CACHE: false,
+      SERVER_CACHE: false,
+      DB_CACHE: false,
     },
   },
 
@@ -42,10 +42,10 @@ export const QUESTIONS: ReadonlyArray<Question> = [
     techText:
       "Needs programmable invalidation: CDN/edge purge APIs and/or a distributed server cache (Redis/Memcached) with key deletes and TTLs.",
     answers: {
-      "HTTP_EDGE": true,
-      "CLIENT_CACHE": false,
-      "SERVER_CACHE": true,
-      "DB_CACHE": false,
+      HTTP_EDGE: true,
+      CLIENT_CACHE: false,
+      SERVER_CACHE: true,
+      DB_CACHE: false,
     },
   },
 
@@ -55,10 +55,10 @@ export const QUESTIONS: ReadonlyArray<Question> = [
     techText:
       "Needs a client fetch/query cache scoped by user and/or a server-side keyed cache (Redis) per user/session.",
     answers: {
-      "HTTP_EDGE": false,
-      "CLIENT_CACHE": true,
-      "SERVER_CACHE": true,
-      "DB_CACHE": false,
+      HTTP_EDGE: false,
+      CLIENT_CACHE: true,
+      SERVER_CACHE: true,
+      DB_CACHE: false,
     },
   },
 
@@ -68,10 +68,10 @@ export const QUESTIONS: ReadonlyArray<Question> = [
     techText:
       "Needs server-side caching: in-process LRU for nanosecond reads and/or a distributed cache (Redis/Memcached) for cross-instance sharing.",
     answers: {
-      "HTTP_EDGE": false,
-      "CLIENT_CACHE": false,
-      "SERVER_CACHE": true,
-      "DB_CACHE": false,
+      HTTP_EDGE: false,
+      CLIENT_CACHE: false,
+      SERVER_CACHE: true,
+      DB_CACHE: false,
     },
   },
 
@@ -81,10 +81,10 @@ export const QUESTIONS: ReadonlyArray<Question> = [
     techText:
       "Needs database-level caching: read replicas and/or materialized views/precomputed tables with controlled refresh.",
     answers: {
-      "HTTP_EDGE": false,
-      "CLIENT_CACHE": false,
-      "SERVER_CACHE": false,
-      "DB_CACHE": true,
+      HTTP_EDGE: false,
+      CLIENT_CACHE: false,
+      SERVER_CACHE: false,
+      DB_CACHE: true,
     },
   },
 
@@ -94,10 +94,10 @@ export const QUESTIONS: ReadonlyArray<Question> = [
     techText:
       "Needs database-level caching via regional read replicas and smart routing; CDN edge caching isn’t suitable for user-specific data.",
     answers: {
-      "HTTP_EDGE": false,
-      "CLIENT_CACHE": false,
-      "SERVER_CACHE": false,
-      "DB_CACHE": true,
+      HTTP_EDGE: false,
+      CLIENT_CACHE: false,
+      SERVER_CACHE: false,
+      DB_CACHE: true,
     },
   },
 
@@ -107,10 +107,10 @@ export const QUESTIONS: ReadonlyArray<Question> = [
     techText:
       "Needs network-side caching only: CDN/edge for public responses; server/distributed cache or DB replicas for personalized data. No client persistence.",
     answers: {
-      "HTTP_EDGE": true,
-      "CLIENT_CACHE": false,
-      "SERVER_CACHE": true,
-      "DB_CACHE": true,
+      HTTP_EDGE: true,
+      CLIENT_CACHE: false,
+      SERVER_CACHE: true,
+      DB_CACHE: true,
     },
   },
   {
@@ -119,10 +119,10 @@ export const QUESTIONS: ReadonlyArray<Question> = [
     techText:
       "Needs server-side single-flight using a distributed cache/lock (e.g., Redis SETNX) to coalesce concurrent requests and cache the result with a short TTL.",
     answers: {
-      "HTTP_EDGE": false,
-      "CLIENT_CACHE": false,
-      "SERVER_CACHE": true,
-      "DB_CACHE": false,
+      HTTP_EDGE: false,
+      CLIENT_CACHE: false,
+      SERVER_CACHE: true,
+      DB_CACHE: false,
     },
   },
   {
@@ -131,10 +131,10 @@ export const QUESTIONS: ReadonlyArray<Question> = [
     techText:
       "Needs HTTP/edge transform pipelines with versioned URLs and per-variant TTLs (CDN/edge rules).",
     answers: {
-      "HTTP_EDGE": true,
-      "CLIENT_CACHE": false,
-      "SERVER_CACHE": false,
-      "DB_CACHE": false,
+      HTTP_EDGE: true,
+      CLIENT_CACHE: false,
+      SERVER_CACHE: false,
+      DB_CACHE: false,
     },
   },
 ];
