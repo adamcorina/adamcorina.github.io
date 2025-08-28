@@ -8,6 +8,27 @@ const SITE = {
   twitterCard: "summary_large_image",
 };
 
+export function HomeHeadTags() {
+  const title = "Right Tool Selector — Tech Quizzes";
+  const description =
+    "Answer a few questions to choose the right frontend tools: rendering modes, styling strategies, and more.";
+
+  return (
+    <>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <link rel="canonical" href={`${SITE.url}/`} />
+
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={`${SITE.url}/`} />
+      <meta property="og:image" content={SITE.ogImage} />
+      <meta name="twitter:card" content={SITE.twitterCard} />
+    </>
+  );
+}
+
 function renderKeywords(keywords?: string[]) {
   if (!keywords || keywords.length === 0) return null;
   return <meta name="keywords" content={keywords.join(", ")} />;

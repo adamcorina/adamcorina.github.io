@@ -1,18 +1,18 @@
 import Quiz from "./routes/Quiz";
 import Learn from "./routes/Learn";
 import { useHashRoute } from "./lib/router";
-import { QUIZZES, DEFAULT_QUIZ } from "./registry";
-import { HeadTags } from "./components/SEO";
+import { QUIZZES } from "./registry";
+import { HeadTags, HomeHeadTags } from "./components/SEO";
+import Home from "./routes/Home";
 
 export default function App() {
   const route = useHashRoute();
 
   if (route.page === "home") {
-    const quiz = QUIZZES[DEFAULT_QUIZ];
     return (
       <div className="min-h-screen w-full bg-slate-50 text-slate-900">
-        <HeadTags route={route} quiz={quiz} />
-        <Quiz quiz={quiz} />
+        <HomeHeadTags />
+        <Home />
       </div>
     );
   }
