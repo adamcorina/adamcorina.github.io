@@ -5,6 +5,9 @@ export type Question<Options extends readonly string[]> = {
   answers: Record<Options[number], boolean>;
 };
 
+export type QuizArea = "frontend" | "backend";
+
+
 export type ApproachInfoEntry = {
   label: string;
   blurb: string;
@@ -22,6 +25,7 @@ export type OptionMeta<Options extends readonly string[]> = {
 export type QuizModule<Options extends readonly string[]> = {
   slug: string;
   name: string;
+  area: QuizArea;
   header: { title: string; intro: string; keywords?: string[] };
   options: ReadonlyArray<OptionMeta<Options>>;
   questions: ReadonlyArray<Question<Options>>;

@@ -24,9 +24,10 @@ export const DEFAULT_QUIZ: QUIZ_TYPES = QUIZ_TYPES.RENDERING;
 
 export const RENDERING_QUIZ = makeQuiz({
   slug: "rendering",
-  name: "Frontend Rendering Strategy Guide",
+  name: "Frontend Delivery Strategy Guide",
+  area: "frontend",
   header: {
-    title: "Frontend Rendering Strategy Guide",
+    title: "Frontend Delivery Strategy Guide",
     intro: `Answer ${RENDERING_QS.length} quick yes/no questions to pinpoint the frontend rendering approach that fits your needs.`,
     keywords: [
       "frontend rendering",
@@ -66,6 +67,7 @@ export const RENDERING_QUIZ = makeQuiz({
 export const STYLING_QUIZ = makeQuiz({
   slug: "styling",
   name: "Styling Strategy Guide",
+  area: "frontend",
   header: {
     title: "Styling Strategy Guide",
     intro: `Answer ${STYLE_QS.length} quick questions to pick a styling approach that fits your team and product.`,
@@ -107,6 +109,7 @@ export const STYLING_QUIZ = makeQuiz({
 export const SERVER_QUIZ = makeQuiz({
   slug: "server",
   name: "Backend Architecture Guide",
+  area: "backend",
   header: {
     title: "Backend Architecture Guide",
     intro: `Answer ${SERVER_QS.length} quick questions to choose between a serverful monolith, serverless, or microservices—using Node.js/TypeScript examples.`,

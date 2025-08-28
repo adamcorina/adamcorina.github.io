@@ -1,6 +1,11 @@
 import { QUIZZES } from "../registry";
 import { hrefQuiz } from "../lib/router";
 
+const AREA_STYLES: Record<"frontend" | "backend", string> = {
+  frontend: "bg-emerald-50 text-emerald-700 ring-emerald-200",
+  backend: "bg-indigo-50 text-indigo-700 ring-indigo-200",
+};
+
 export default function Home() {
   const quizzes = Object.entries(QUIZZES);
 
@@ -24,13 +29,24 @@ export default function Home() {
       {/* Cards */}
       <section className="grid gap-6 md:grid-cols-2">
         {quizzes.map(([slug, quiz]) => {
-          return (
-            <article
-              key={slug}
-              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-            >
-              <h2 className="text-xl font-semibold">{quiz.header.title}</h2>
-              <p className="mt-2 text-slate-600">{quiz.header.intro}</p>
+        const badgeClass = AREA_STYLES[quiz.area];
+
+        return (
+            <article key={slug} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <h2 className="text-xl font-semibold">{quiz.header.title}</h2>
+                    <span
+                      className={`rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${badgeClass}`}
+                      title={`${quiz.area} quiz`}
+                    >
+                      {quiz.area === "frontend" ? "Frontend" : "Backend"}
+                    </span>
+                </div>
+                  <p className="mt-2 text-slate-600">{quiz.header.intro}</p>
+                </div>
+              </div>
 
               {/* Option pills */}
               <ul className="mt-4 flex flex-wrap gap-2">
@@ -41,6 +57,7 @@ export default function Home() {
                     title={o.long}
                   >
                     <span className="font-medium">{o.short}</span>
+                    <span className="opacity-80"> — {o.long}</span>
                   </li>
                 ))}
               </ul>
