@@ -1,5 +1,5 @@
 import { QUIZZES } from "../registry";
-import { hrefQuiz, hrefLearn } from "../lib/router";
+import { hrefQuiz } from "../lib/router";
 
 export default function Home() {
   const quizzes = Object.entries(QUIZZES);
