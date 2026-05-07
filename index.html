@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corina Velea</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --text: #1a1a1a;
+      --muted: #666;
+      --border: #e0e0e0;
+      --bg: #ffffff;
+      --accent: #1a1a1a;
+    }
+
+    html {
+      font-size: 17px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Georgia, 'Times New Roman', serif;
+      line-height: 1.75;
+      padding: 0 1.5rem;
+    }
+
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 5rem 0 6rem;
+    }
+
+    /* header */
+    .site-header {
+      margin-bottom: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+    }
+
+    .site-header img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      filter: grayscale(20%);
+    }
+
+    .site-header h1 {
+      font-size: 1.15rem;
+      font-weight: normal;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+    }
+
+    /* sections */
+    section {
+      margin-bottom: 3.5rem;
+    }
+
+    section h2 {
+      font-size: 0.8rem;
+      font-weight: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+
+    /* about */
+    .about p {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .about p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--text);
+    }
+
+    .about a:hover {
+      color: var(--muted);
+      border-color: var(--muted);
+    }
+
+    /* projects */
+    .project {
+      padding: 1.6rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .project:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .project-header h3 {
+      font-size: 1rem;
+      font-weight: normal;
+    }
+
+    .project-header a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--text);
+    }
+
+    .project-header a:hover {
+      color: var(--muted);
+      border-color: var(--muted);
+    }
+
+    .project-status {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-style: italic;
+      font-family: Georgia, serif;
+    }
+
+    .project p {
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .project p:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-stack {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: 'Courier New', Courier, monospace;
+      margin-top: 0.75rem;
+    }
+
+    /* notes */
+    .notes-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .notes-list li {
+      padding: 0.5rem 0;
+      border-top: 1px solid var(--border);
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    .notes-list li:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .notes-list li::before {
+      content: '-  ';
+      color: var(--muted);
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* footer */
+    footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    footer a:hover {
+      color: var(--text);
+      border-color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <main>
+
+    <header class="site-header">
+      <img src="avatar.jpg" alt="Corina Velea" />
+      <h1>Corina Velea</h1>
+    </header>
+
+    <section class="about">
+      <h2>About</h2>
+      <p>
+        Senior software developer from Cluj, Romania.
+      </p>
+      <p>
+        Professionally, I work mostly with React/Next.js, Node.js, PostgreSQL, AWS,
+        and modern TS/JS full-stack architectures - but more about that on <a href="https://www.linkedin.com/in/corina-mara-velea-aa5647168/" target="_blank" rel="noopener">LinkedIn</a>.
+      </p>
+      <p>
+        Outside of work I like exploring ideas through small personal projects -
+        especially where human behavior meets software. Most of them started as quick
+        experiments using modern AI tools, then evolved from there. These are the recent ones.
+      </p>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+
+      <div class="project">
+        <div class="project-header">
+          <h3>Train Solo</h3>
+          <span class="project-status">presentation site coming soon</span>
+        </div>
+        <p>
+          A desktop training system for people who already know how to train.
+        </p>
+        <p>
+          Most self-directed lifters don't need motivation systems or generic plans. What they're
+          missing is the layer in between - knowing what to do today, whether it's working, and
+          when to change something. Train Solo tries to fill that gap with a transparent planning
+          engine that reasons about your training the way a coach would.
+        </p>
+        <div class="project-stack">Electron &middot; React &middot; Drizzle ORM &middot; SQLite3 &middot; Tailwind &middot; Vercel AI SDK</div>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <h3><a href="http://match-me.velea.cc/" target="_blank" rel="noopener">Match Me</a></h3>
+        </div>
+        <p>
+          A compatibility quiz exploring attachment, conflict resolution, emotional needs,
+          independence, communication styles, and relationship expectations.
+        </p>
+        <p>
+          Inspired by relationship psychology research and some frustration with how shallow
+          most matching systems actually are.
+        </p>
+        <div class="project-stack">HTML &middot; JS &middot; CSS</div>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <h3><a href="https://tech-quizzes.velea.cc/" target="_blank" rel="noopener">Tech Quiz</a></h3>
+        </div>
+        <p>
+          A quiz tool for frontend and backend architecture decisions. You answer a few yes/no
+          questions and it recommends an approach - rendering strategy, styling setup, backend
+          architecture, caching layers, or database type. Less "what do you know" and more
+          "what fits your situation."
+        </p>
+        <div class="project-stack">React &middot; Tailwind</div>
+      </div>
+
+    </section>
+
+
+<footer>
+      <a href="https://github.com/adamcorina" target="_blank" rel="noopener">github.com/adamcorina</a>
+    </footer>
+
+  </main>
+</body>
+</html>
